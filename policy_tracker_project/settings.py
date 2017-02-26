@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'validators'
+    'social_django',
+    'validators',
+    'policy_tracker_app',
 ]
 
 MIDDLEWARE = [
@@ -50,12 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'policy_tracker.urls'
+ROOT_URLCONF = 'policy_tracker_project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,13 +65,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-		'django.template.context_processors.media',
+		        'django.template.context_processors.media',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'policy_tracker.wsgi.application'
+WSGI_APPLICATION = 'policy_tracker_project.wsgi.application'
 
 
 # Database
@@ -127,6 +129,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Social Authentication Backends
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend')
+
+# Social Authentication Pipeline for processing User
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -158,3 +179,9 @@ MEDIA_URL = '/media/'
 # Login and redirect URLS
 
 LOGIN_URL = '/login/'
+
+# OAuth2 Keys
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '691172428243-74h299ssj4jqr11584ooing6ke48se5f'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OM_8IoG2ImIJ7kJTLGQhzP60'
