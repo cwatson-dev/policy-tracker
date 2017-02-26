@@ -7,7 +7,11 @@
 
 	{% block body_block %}
 		<div>
-        TESTING
+        TESTING - You have visited this site {{ visits }} times.
 		</div>
+		{% if user.is_authenticated %}
+			User is authenticated!!
+			{{ user.username}}
+		{% endif %}
 
 	{% endblock %}
