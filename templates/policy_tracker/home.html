@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 	{% block title_block %}
-		Home
+		- Home
 	{% endblock %}
 
 	{% block body_block %}
@@ -13,5 +13,12 @@
 			User is authenticated!!
 			{{ user.username}}
 		{% endif %}
+		<br/><br/>
+
+		<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+		<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+		<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+		<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
 
 	{% endblock %}

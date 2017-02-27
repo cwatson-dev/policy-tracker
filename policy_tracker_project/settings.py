@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,9 +19,6 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g0b*uj0m9*bl04spk$thv6!7#p+^6mp&obyxlmiliryc94@-f4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -133,7 +131,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend')
+    'social_core.backends.google.GooglePlusAuth',
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+)
 
 # Social Authentication Pipeline for processing User
 
@@ -148,6 +151,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+# Social Authentication Redirect
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -180,8 +187,4 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/login/'
 
-# OAuth2 Keys
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '691172428243-74h299ssj4jqr11584ooing6ke48se5f'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OM_8IoG2ImIJ7kJTLGQhzP60'
+LOGOUT_URL = '/logout/'

@@ -21,5 +21,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include('policy_tracker_app.urls')),
     url(r'^admin/', admin.site.urls),
-    url("^soc/", include("social_django.urls", namespace="social")),
+    url(r'^oauth/', include("social_django.urls", namespace="social")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
