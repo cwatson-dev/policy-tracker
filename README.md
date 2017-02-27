@@ -26,9 +26,7 @@ Login via GoogleOAuth2 API is implemented through the social-auth-app-django mod
 
 Currently, a basic template Home HTML file is used with no functionality. As such, for now, logging in with GoogleOAuth2 has to be done by directly navigating to:
 
-```
 <http://localhost:8000/soc/login/google-oauth2/?next=/>
-```
 
 There you will be asked to login and/or pick which Google account you want to use to grant permissions to Policy Tracker.
 Policy Tracker will then receive details such as Firstname, Surname and email address to create a User object in the DB with.
