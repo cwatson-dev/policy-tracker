@@ -6,19 +6,22 @@
 	{% endblock %}
 
 	{% block body_block %}
-		<div>
-        TESTING - You have visited this site {{ visits }} times.
+		<div class="container-fluid">
+			<div class="col-md-12">
+	        <h3>TESTING - You have visited this site {{ visits }} times.</h3>
+			</div>
+			<div class="col-md-12">
+				{% if user.is_authenticated %}
+					User is authenticated!!
+					{{ user.username}}
+				{% endif %}
+				<br/><br/>
+				<div class="col-md-10 col-md-offset-2">
+					<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+					<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+					<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+					<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+				</div>
+			</div>
 		</div>
-		{% if user.is_authenticated %}
-			User is authenticated!!
-			{{ user.username}}
-		{% endif %}
-		<br/><br/>
-
-		<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
-		<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
-		<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
-		<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-
-
 	{% endblock %}
