@@ -1,0 +1,9 @@
+# This is an implicit value, here for clarity
+--index-url https://pypi.python.org/simple/
+
+bcrypt==3.1.2
+argon2-cffi==16.3.0
+Pillow==4.0.0
+requests==2.13.0
+Django==1.10
+social-auth-app-django==1.1.0
