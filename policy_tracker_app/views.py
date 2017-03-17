@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 from social_django.models import UserSocialAuth
+from policy_tracker_app.models import Country, Promise, Category
 
 def home(request):
     context_dict = {}
@@ -21,7 +22,7 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
-    return render(request, 'rango/about.html', context_dict)
+    return render(request, 'policy_tracker/about.html', context_dict)
 
 def register(request):
     registered = False
