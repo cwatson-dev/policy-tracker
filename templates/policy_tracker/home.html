@@ -8,19 +8,64 @@
 	{% block body_block %}
 		<div class="container-fluid">
 			<div class="col-md-12">
-	        <h3>TESTING - You have visited this site {{ visits }} times.</h3>
-			</div>
-			<div class="col-md-12">
-				{% if user.is_authenticated %}
-					User is authenticated!!
-					{{ user.username}}
-				{% endif %}
-				<br/><br/>
-				<div class="col-md-10 col-md-offset-2">
-					<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
-					<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
-					<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
-					<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+				<div class="row">
+					<div class="col-md-5">
+			      <img src="{% static 'images/PolicyTrackerLogoTransparent.png' %}" width="100%" class="home-logo">
+					</div>
+					<div class="col-md-5 offset-md-1 align-self-center login-box">
+						<div class="row">
+		          <div class="col-md-6">
+								<br/>
+		            <form id="login_form" method="post" action="{% url 'login' %}" class="text-center">
+		              {% csrf_token %}
+		              <div style="color: red">{{ error }}</div><br/>
+		              {% if username %}
+		                <input type="text" name="username" size="25%" value="{{ username }}" class="login-inputs"/>
+		                <br/><br/>
+		                <input type="password" name="password" value="" placeholder="Password" size="25%" autofocus class="login-inputs"/> <br />
+		              {% else %}
+		                <input type="text" name="username" size="25%" placeholder="Email address" autofocus class="login-inputs"/>
+		                <br/><br/>
+		                <input type="password" name="password" placeholder="Password" size="25%" class="login-inputs"/> <br />
+		              {% endif %}
+		              <br/>
+		              <button class="btn btn-success login-btn" type="submit">Sign in</button>
+		            </form>
+		            <br/>
+		          </div>
+		          <div class="col-md-6 text-center">
+								<br/>
+		            <div class="col align-self-center">
+		              <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google sm-social" width="100%">
+		                <span class="fa fa-google"></span>Sign in with Google</a>
+									<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google btn-lg lg-social" width="100%">
+			               <span class="fa fa-google"></span>Sign in with Google</a>
+		    					<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook sm-social" width="100%">
+		                <span class="fa fa-facebook"></span>Login with Facebook</a>
+									<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook btn-lg lg-social" width="100%">
+			              <span class="fa fa-facebook"></span>Login with Facebook</a>
+		    					<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter sm-social" width="100%">
+		                <span class="fa fa-twitter"></span>Login with Twitter</a>
+									<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter btn-lg lg-social" width="100%">
+			              <span class="fa fa-twitter"></span>Login with Twitter</a>
+		    					<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github sm-social" width="100%">
+		                <span class="fa fa-github"></span>Login with GitHub</a>
+									<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github btn-lg lg-social" width="100%">
+			              <span class="fa fa-github"></span>Login with GitHub</a>
+		            </div>
+		          </div>
+		        </div>
+						<div class="row or">
+							<h4>or</h4>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 offset-md-1 text-center">
+						<h4>Welcome to Policy Tracker! Our aim is to provide users with an environment where they can add, update and follow the policies and promises of governing bodies from around the world.</h4>
+						<br/>
+						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed FAQs section, check out both the <a href="#">About</a> page and <a href="#">Updates</a> page.</h4>
+					</div>
 				</div>
 			</div>
 		</div>

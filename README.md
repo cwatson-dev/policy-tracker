@@ -3,12 +3,23 @@ A political promise tracker for monitoring Government parties and their policies
 
 ## Getting Started
 Clone this git repository down to your system.
+
+`git clone https://github.com/2190594W/policy-tracker`
+
+then
+
+`git checkout development`
+
+then
+
+`git pull`
+
 Navigate to `policy-tracker` folder; which contains the `manage.py` file.
 
-Run the following command to install `social-auth-app-django`:
+Run the following command to install the correct dependencies:
 
 ```bash
-pip install social-auth-app-django
+pip install -r requirements.txt
 ```
 
 ### After the module has been installed you need to download the config.pyc file provided via Slack (or other means) and place it in the policy_tracker_project directory next to the settings.pyc file. This config file is vital in providing the correct credentials for OAuth2 configuration as it provides the application keys and secrets from Google, Facebook, Twitter and GitHub.

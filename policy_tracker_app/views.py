@@ -65,14 +65,14 @@ def user_login(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponseRedirect(reverse('index'))
+                    return HttpResponseRedirect(reverse('home'))
                 else:
-                    return HttpResponse("Your Rango account is disabled.")
+                    return HttpResponse("Your Policy Tracker account is disabled.")
             else:
                 errorMessage = "Invalid login details. Username '{0}' does not match the password provided.".format(username)
-                return render(request, 'rango/login.html', {'error': errorMessage, 'username': format(username)})
+                return render(request, 'policy_tracker/login.html', {'error': errorMessage, 'username': format(username)})
     else:
-        return render(request, 'rango/login.html', {})
+        return render(request, 'policy_tracker/login.html', {})
 
 @login_required
 def profile_settings(request):
