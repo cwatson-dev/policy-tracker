@@ -1,0 +1,59 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - Login
+{% endblock %}
+
+{% block body_block %}
+  <h1>Login to Policy Tracker</h1>
+  <br/><br/>
+  <div class="container">
+    <div class="col-md-12">
+      <div class="offset-md-2 col-md-8 login-box">
+        <div class="row">
+          <div class="col-md-6 login-left">
+            <br/><br/>
+            <form id="login_form" method="post" action="{% url 'login' %}" class="text-center">
+              {% csrf_token %}
+              <div style="color: red">{{ error }}</div><br/>
+              {% if username %}
+                <input type="text" name="username" size="30" value="{{ username }}" class="login-inputs"/>
+                <br/><br/>
+                <input type="password" name="password" value="" placeholder="Password" size="30" autofocus class="login-inputs"/> <br />
+              {% else %}
+                <input type="text" name="username" size="30" placeholder="Email address" autofocus class="login-inputs"/>
+                <br/><br/>
+                <input type="password" name="password" placeholder="Password" size="30" class="login-inputs"/> <br />
+              {% endif %}
+              <br/>
+              <button class="btn btn-success login-btn" type="submit">Sign in</button>
+            </form>
+            <br/>
+            <div class="col align-self-center text-center">
+              <a href="#">Lost your password?</a>
+            </div>
+            <br/>
+          </div>
+          <div class="col-md-6 text-center login-right">
+            <br/>
+            <div class="col align-self-center">
+              <a href="{% url 'register' %}">Don't have an account? Sign up here!</a>
+            </div>
+            <br/>
+            <div class="col-md-10 offset-md-1 align-self-center text-center">
+              <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google" width="100%">
+                <span class="fa fa-google"></span>Sign in with Google</a><br><br>
+    					<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook" width="100%">
+                <span class="fa fa-facebook"></span>Login with Facebook</a><br><br>
+    					<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter" width="100%">
+                <span class="fa fa-twitter"></span>Login with Twitter</a><br><br>
+    					<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github" width="100%">
+                <span class="fa fa-github"></span>Login with GitHub</a><br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

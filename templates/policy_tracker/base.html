@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load policy_tracker_app_template_tags %}
+
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title>
+      Policy Tracker
+      {% block title_block %}
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'stylesheets/font-awesome.min.css' %}">
+  </head>
+  <body>
+    <div>
+      {% comment %}
+      <!--{% include 'policy_tracker/navbar.html' %}-->
+      {% endcomment %}
+    </div>
+    <div>
+      {% block body_block %}
+        This is body_block's default content.
+      {% endblock %}
+    </div>
+    <br/>
+    <hr />
+    <div style="bottom: 0;">
+      {% include 'policy_tracker/footer.html' %}
+    </div>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'stylesheets/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'stylesheets/app.css' %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+</html>
