@@ -1,0 +1,14 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - {{ country.name }}
+{% endblock %}
+
+{% block body_block %}
+  <div class="col country-header text-center" style="background-image: url('{{MEDIA_URL}}country_images/{{country.background_image}}');">
+    <div class="transparent">
+      <h1 class="align-self-center">{{ country.name }}</h1>
+    </div>
+  </div>
+{% endblock %}

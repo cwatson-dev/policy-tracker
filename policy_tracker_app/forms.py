@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from policy_tracker_app.models import Country, Promise, Category, UserProfile
+from policy_tracker_app.models import Country, Policy, Category, UserProfile
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput() )
@@ -13,3 +13,8 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('website', 'picture')
+
+class CountryForm(forms.ModelForm):
+    class Meta:
+        model = Country
+        fields = ('name', 'inPower', 'description', 'background_image')
