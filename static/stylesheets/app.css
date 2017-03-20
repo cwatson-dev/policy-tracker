@@ -81,6 +81,34 @@
   margin-left: 10%;
 }
 
+.navbar-box {
+	width: 100%;
+	height: 8%;
+	border: 1px solid black;
+	z-index: 1000;
+	position: fixed; 
+	background-color:#ECECEC; 
+	color:gray;
+}
+
+
+.navbar-box a div {
+	text-align: center;
+	margin-top: 10%;
+}
+
+.navbar-box .row {
+	
+}
+
+.navbar-box a div:hover:not(.active) {
+	color: #7F7FFF;
+}
+
+.navbar-box a:active {
+	background-color: #7F7FFF;
+}
+	
 .country-header {
   padding-left: 0;
   padding-right: 0;

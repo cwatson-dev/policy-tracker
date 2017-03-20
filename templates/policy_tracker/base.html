@@ -13,11 +13,7 @@
     <link rel="stylesheet" href="{% static 'stylesheets/font-awesome.min.css' %}">
   </head>
   <body>
-    <div>
-      {% comment %}
-      <!--{% include 'policy_tracker/navbar.html' %}-->
-      {% endcomment %}
-    </div>
+    {% include 'policy_tracker/navbar.html' %}
     <div>
       {% block body_block %}
         This is body_block's default content.
