@@ -15,6 +15,9 @@ class UserProfileForm(forms.ModelForm):
         fields = ('website', 'picture')
 
 class CountryForm(forms.ModelForm):
+    name = forms.CharField(max_length=64, help_text="Please enter the country name.")
+    inPower = forms.CharField(max_length=64, help_text="Please enter the governing body/ruler.")
+    
     class Meta:
         model = Country
         fields = ('name', 'inPower', 'description', 'background_image')
