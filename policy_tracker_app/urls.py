@@ -4,6 +4,7 @@ from policy_tracker_app import views
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
 	url(r'^about/$', views.about, name='about'),
+	url(r'^countries/(?P<country_name_slug>[\w\-]+)/$', views.country, name='country'),
 	url(r'^register/$', views.register, name='register'),
 	url(r'^countries/$', views.countries, name='countries'),
 	url(r'^login/$', views.user_login, name='login'),
