@@ -10,7 +10,7 @@ class Country(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+        super(Country, self).save(*args, **kwargs)
         slug = models.SlugField(unique=True)
 
     class Meta:

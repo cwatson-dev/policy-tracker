@@ -26,6 +26,30 @@ def about(request):
     context_dict['last_visit'] = request.session['last_visit']
     return render(request, 'policy_tracker/about.html', context_dict)
 
+def countries(request):
+    country_list = Country.objects.all()
+    context_dict = {'countries': country_list}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    return render(request, 'policy_tracker/countries.html', context_dict)
+
+# def add_country(request):
+#     form = CountryForm()
+#
+#     if request.method == 'POST':
+#         form = CountryForm(request.POST)
+#
+#     if form.is_valid():
+#         country = form.save(commit=True)
+#         print(country, country.slug)
+#         return countries(request)
+#
+#     else:
+#         print(form.errors)
+#
+#     return render(request, 'policy_tracker/add_country.html', {"form": form})
+
 def register(request):
     registered = False
 
