@@ -14,9 +14,10 @@
     {% if countries %}
       {% for country in countries %}
         <div class="col-md-4">
-          <div class="thumbnail">
+          <div class="img-thumbnail">
             <a href="#">
-              <img src="{{ MEDIA_URL }}{{ country.slug }}.png" alt="" width="400" height="300">
+              <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
+                        {% endwith %}" alt="{{ country.name }} map flag" height="250px" >
               <div class="caption">
                 <p>{{ country.name }}</p>
               </div>

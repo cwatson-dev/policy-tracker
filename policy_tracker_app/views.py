@@ -64,7 +64,7 @@ def country(request, country_name_slug):
 
     return render(request, 'policy_tracker/country.html', context_dict)
 
-  
+
 def countries(request):
     country_list = Country.objects.all()
     context_dict = {'countries': country_list}
@@ -73,7 +73,7 @@ def countries(request):
     context_dict['last_visit'] = request.session['last_visit']
     return render(request, 'policy_tracker/countries.html', context_dict)
 
-  
+
 # def add_country(request):
 #     form = CountryForm()
 #
