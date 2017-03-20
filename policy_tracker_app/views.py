@@ -7,9 +7,38 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 from social_django.models import UserSocialAuth
+from policy_tracker_app.models import Country, Policy, Category
+from policy_tracker_app.forms import UserForm, UserProfileForm
+
 
 def home(request):
-    context_dict = {}
+    user = request.user
+    if user.is_authenticated():
+        auth_providers = []
+        try:
+            logins = user.social_auth.filter(user_id=user.id)
+            for i in range(0, len(logins)):
+                auth_provider = logins[i]
+                if i < (len(logins) - 2):
+                    auth_providers.append(auth_provider.provider + ",")
+                else:
+                    auth_providers.append(auth_provider.provider)
+            if len(auth_providers) > 1:
+                auth_providers.insert((len(auth_providers) - 1), "and")
+                auth_providers.append("accounts.")
+            else:
+                auth_providers.append("account.")
+            auth_providers = [provider.replace('google-oauth2', 'Google').replace('f', 'F').replace('tw', 'Tw').replace('gi', 'Gi') for provider in auth_providers]
+        except UserSocialAuth.DoesNotExist:
+            auth_providers = None
+
+        context_dict = {
+            'logins': auth_providers,
+        }
+
+    else:
+        context_dict = {}
+
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
@@ -21,7 +50,46 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
-    return render(request, 'rango/about.html', context_dict)
+    return render(request, 'policy_tracker/about.html', context_dict)
+
+
+def country(request, country_name_slug):
+    context_dict = {}
+
+    try:
+        country = Country.objects.get(slug=country_name_slug)
+        context_dict['country'] = country
+    except:
+        context_dict['country'] = None
+
+    return render(request, 'policy_tracker/country.html', context_dict)
+
+  
+def countries(request):
+    country_list = Country.objects.all()
+    context_dict = {'countries': country_list}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    return render(request, 'policy_tracker/countries.html', context_dict)
+
+  
+# def add_country(request):
+#     form = CountryForm()
+#
+#     if request.method == 'POST':
+#         form = CountryForm(request.POST)
+#
+#     if form.is_valid():
+#         country = form.save(commit=True)
+#         print(country, country.slug)
+#         return countries(request)
+#
+#     else:
+#         print(form.errors)
+#
+#     return render(request, 'policy_tracker/add_country.html', {"form": form})
+
 
 def register(request):
     registered = False
@@ -50,7 +118,7 @@ def register(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(request, 'rango/register.html',
+    return render(request, 'policy_tracker/register.html',
               {'user_form': user_form, 'profile_form': profile_form,
                'registered': registered})
 

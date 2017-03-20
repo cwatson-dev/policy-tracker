@@ -13,55 +13,83 @@
 			      <img src="{% static 'images/PolicyTrackerLogoTransparent.png' %}" width="100%" class="home-logo">
 					</div>
 					<div class="col-md-5 offset-md-1 align-self-center login-box">
-						<div class="row">
-		          <div class="col-md-6">
+						{% if not user.is_authenticated %}
+							<div class="row">
+			          <div class="col-md-6">
+			            <form id="login_form" method="post" action="{% url 'login' %}" class="text-center">
+			              {% csrf_token %}
+			              <div style="color: red">{{ error }}</div><br/>
+			              {% if username %}
+			                <input type="text" name="username" size="25%" value="{{ username }}" class="login-inputs"/>
+			                <br/><br/>
+			                <input type="password" name="password" value="" placeholder="Password" size="25%" autofocus class="login-inputs"/> <br />
+			              {% else %}
+			                <input type="text" name="username" size="25%" placeholder="Username" autofocus class="login-inputs"/>
+			                <br/><br/>
+			                <input type="password" name="password" placeholder="Password" size="25%" class="login-inputs"/> <br />
+			              {% endif %}
+			              <br/>
+			              <button class="btn btn-success login-btn" type="submit">Sign in</button>
+			            </form>
+			            <br/>
+			          </div>
+			          <div class="col-md-6 text-center">
+									<br/>
+			            <div class="col align-self-center">
+			              <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google sm-social" width="100%">
+			                <span class="fa fa-google"></span>Sign in with Google</a>
+										<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google btn-lg lg-social" width="100%">
+				               <span class="fa fa-google"></span>Sign in with Google</a>
+			    					<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook sm-social" width="100%">
+			                <span class="fa fa-facebook"></span>Login with Facebook</a>
+										<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook btn-lg lg-social" width="100%">
+				              <span class="fa fa-facebook"></span>Login with Facebook</a>
+			    					<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter sm-social" width="100%">
+			                <span class="fa fa-twitter"></span>Login with Twitter</a>
+										<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter btn-lg lg-social" width="100%">
+				              <span class="fa fa-twitter"></span>Login with Twitter</a>
+			    					<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github sm-social" width="100%">
+			                <span class="fa fa-github"></span>Login with GitHub</a>
+										<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github btn-lg lg-social" width="100%">
+				              <span class="fa fa-github"></span>Login with GitHub</a>
+			            </div>
+			          </div>
+							</div>
+							<div class="row or">
+								<h4>or</h4>
+							</div>
+						{% else %}
+							<br/><br/>
+							<div class="col-md-10 offset-md-1">
+								<div class="row">
+									<h3>Hello again, {{user.first_name}} {{user.last_name}}.</h3>
+									<h5>You are logged in as <span style="color: #5cb85c;">{{user.username}}</span>.</h5>
+									{% if logins %}
+										<h5>Currently, you have connected your
+											{% for login in logins %}
+												{{login}}
+											{% endfor %}
+											{% if logins|length < 6 %}
+												Why not connect another account on the <a style="text-decoration: none;" href="{% url 'profile_settings' %}">Profile Settings</a> page?
+											{% endif %}
+										</h5>
+
+									{% else %}
+										<h5>You haven't yet connected any Social Accounts yet. Change this on the <a href="{% url 'profile_settings' %}">Profile Settings</a> page.</h5>
+									{% endif %}
+								</div>
 								<br/>
-		            <form id="login_form" method="post" action="{% url 'login' %}" class="text-center">
-		              {% csrf_token %}
-		              <div style="color: red">{{ error }}</div><br/>
-		              {% if username %}
-		                <input type="text" name="username" size="25%" value="{{ username }}" class="login-inputs"/>
-		                <br/><br/>
-		                <input type="password" name="password" value="" placeholder="Password" size="25%" autofocus class="login-inputs"/> <br />
-		              {% else %}
-		                <input type="text" name="username" size="25%" placeholder="Email address" autofocus class="login-inputs"/>
-		                <br/><br/>
-		                <input type="password" name="password" placeholder="Password" size="25%" class="login-inputs"/> <br />
-		              {% endif %}
-		              <br/>
-		              <button class="btn btn-success login-btn" type="submit">Sign in</button>
-		            </form>
-		            <br/>
-		          </div>
-		          <div class="col-md-6 text-center">
-								<br/>
-		            <div class="col align-self-center">
-		              <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google sm-social" width="100%">
-		                <span class="fa fa-google"></span>Sign in with Google</a>
-									<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google btn-lg lg-social" width="100%">
-			               <span class="fa fa-google"></span>Sign in with Google</a>
-		    					<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook sm-social" width="100%">
-		                <span class="fa fa-facebook"></span>Login with Facebook</a>
-									<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook btn-lg lg-social" width="100%">
-			              <span class="fa fa-facebook"></span>Login with Facebook</a>
-		    					<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter sm-social" width="100%">
-		                <span class="fa fa-twitter"></span>Login with Twitter</a>
-									<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter btn-lg lg-social" width="100%">
-			              <span class="fa fa-twitter"></span>Login with Twitter</a>
-		    					<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github sm-social" width="100%">
-		                <span class="fa fa-github"></span>Login with GitHub</a>
-									<a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github btn-lg lg-social" width="100%">
-			              <span class="fa fa-github"></span>Login with GitHub</a>
-		            </div>
-		          </div>
-		        </div>
-						<div class="row or">
-							<h4>or</h4>
-						</div>
+								<div class="row">
+									<a class="col-md-4 offset-md-1 btn btn-primary" href="{% url 'profile_settings' %}">Profile Settings</a>
+	        				<a class="col-md-4 offset-md-2 btn btn-danger" href="{% url 'logout' %}">Logout</a>
+								</div>
+							</div>
+							<br/><br/>
+						{% endif %}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-10 offset-md-1 text-center">
+					<div class="col-md-10 offset-md-1 text-center description">
 						<h4>Welcome to Policy Tracker! Our aim is to provide users with an environment where they can add, update and follow the policies and promises of governing bodies from around the world.</h4>
 						<br/>
 						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed FAQs section, check out both the <a href="#">About</a> page and <a href="#">Updates</a> page.</h4>
