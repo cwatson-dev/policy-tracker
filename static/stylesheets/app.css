@@ -4,6 +4,11 @@
   background-color: #f7f7f7;
 }
 
+.country-box {
+  border: 2px solid #373737;
+  margin-bottom: 30px;
+}
+
 .text-center {
   text-align: center;
 }
