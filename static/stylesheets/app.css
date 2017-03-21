@@ -164,7 +164,11 @@ label {
   }
 
   .card .front {
+    margin: auto;
+    width: 300px;
+    height: 250px;
     margin-top: 15px;
+    margin-bottom: 30px;
   }
 
   .front img {
@@ -175,9 +179,8 @@ label {
   }
 
   .card .back {
+    padding-bottom: 125px;
     position: absolute;
-    background: #222;
-    color: #FFF;
     -webkit-transform: rotateX(180deg);
     transform: rotateX(180deg);
   }
@@ -188,7 +191,7 @@ label:hover .card {
   box-shadow: 0 20px 20px rgba(50,50,50,.2);
 }
 
-input {
+label input {
   display: none;
 }
 

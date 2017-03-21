@@ -19,14 +19,14 @@
               <div class="card country-box">
                 <div class="front">
                   <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
-                            {% endwith %}" alt="{{ country.name }} map flag">
+                            {% endwith %}" alt="{{ country.name }} map flag"><br/>
                   <div class="caption">
                     <p>{{ country.name }}</p>
                   </div>
                 </div>
-                <div class="back">
+                <div class="back align-self-center">
                   {{ country.inPower }} <!--add link to governing body page-->
-                  <a href="{{ country.slug }}">See more...</a>
+                  <a href="{{ country.slug }}" style="text-decoration: none">See more...</a>
                 </div>
               </div>
             </label>
