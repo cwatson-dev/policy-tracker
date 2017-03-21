@@ -8,14 +8,14 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
-        #widgets = {
-        #    'password': forms.PasswordInput(attrs={"class":"test"}),
-        #}
+        widgets = {
+            'password': forms.PasswordInput(attrs={"class":"test"}),
+        }
 
-    #def clean(self):
-    #    cleaned_data = super(UserForm, self).clean()
-    #    if cleaned_data['password'] != cleaned_data['confirm_password']:
-    #        raise forms.ValidationError("The two passwords entered do not match.")
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        if cleaned_data['password'] != cleaned_data['confirm_password']:
+            raise forms.ValidationError("The two passwords entered do not match.")
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
