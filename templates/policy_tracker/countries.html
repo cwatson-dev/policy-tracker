@@ -1,0 +1,33 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Countries
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class=page-header>Countries</h1>
+    </div>
+    {% if countries %}
+      {% for country in countries %}
+        <div class="col-md-4">
+          <div class="img-thumbnail">
+            <a href="#">
+              <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
+                        {% endwith %}" alt="{{ country.name }} map flag" height="250px" >
+              <div class="caption">
+                <p>{{ country.name }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <strong>No countries present</strong>
+    {% endif %}
+ </div>
+</div>
+{% endblock %}

@@ -14,6 +14,10 @@
   margin: 5px;
 }
 
+.btn-social-icon {
+  color: #ffffff !important;
+}
+
 .login-inputs {
   border-radius: 0;
   padding: 10px;
@@ -43,6 +47,11 @@
   display: none;
 }
 
+.navbar-override {
+  padding: 0 5rem 0 0;
+  border: 1px solid gray;
+}
+
 @media (min-width: 1920px) {
   .login-inputs {
     font-size: 160%;
@@ -59,6 +68,10 @@
   .lg-social {
     display: inline-block;
   }
+
+  .description h4 {
+    font-size: 200%;
+  }
 }
 
 .or {
@@ -71,4 +84,41 @@
 
 .home-logo {
   margin-left: 10%;
+}
+
+.country-header {
+  padding-left: 0;
+  padding-right: 0;
+  background-size: 100%;
+  height: 300px;
+}
+
+.transparent {
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.6);
+}
+
+.country-header h1 {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 400%;
+  color: #ffffff;
+}
+
+#login_form {
+  margin-top: 2%;
+}
+
+.text-center .nav-item {
+  margin: 0 5%;
+}
+
+.ml-auto .nav-item {
+  margin: 0 7%;
+}
+
+.active {
+  color: #0275d8 !important;
 }
