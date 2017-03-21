@@ -13,19 +13,15 @@
     <link rel="stylesheet" href="{% static 'stylesheets/font-awesome.min.css' %}">
   </head>
   <body>
-    <div>
-      {% comment %}
-      <!--{% include 'policy_tracker/navbar.html' %}-->
-      {% endcomment %}
-    </div>
-    <div>
+    {% include 'policy_tracker/navbar.html' %}
+    <div style="margin-top: 100px;">
       {% block body_block %}
         This is body_block's default content.
       {% endblock %}
     </div>
     <br/>
     <hr />
-    <div style="bottom: 0;">
+    <div style="bottom: 0; margin-bottom: 20px;">
       {% include 'policy_tracker/footer.html' %}
     </div>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
