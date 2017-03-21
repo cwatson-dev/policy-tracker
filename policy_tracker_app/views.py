@@ -50,6 +50,7 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
+    context_dict['nbar'] = 'about'
     return render(request, 'policy_tracker/about.html', context_dict)
 
 
@@ -64,16 +65,17 @@ def country(request, country_name_slug):
 
     return render(request, 'policy_tracker/country.html', context_dict)
 
-  
+
 def countries(request):
     country_list = Country.objects.all()
     context_dict = {'countries': country_list}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
+    context_dict['nbar'] = 'countries'
     return render(request, 'policy_tracker/countries.html', context_dict)
 
-  
+
 # def add_country(request):
 #     form = CountryForm()
 #
@@ -197,8 +199,9 @@ def profile_password(request):
     return render(request, 'policy_tracker/profile_password.html', {'form': form})
 
 @login_required
-def restricted(request):
-    return render(request, 'rango/restricted.html')
+def profile(request):
+    context_dict['nbar'] = 'profile'
+    return render(request, 'policy_tracker/profile.html', context_dict)
 
 @login_required
 def user_logout(request):

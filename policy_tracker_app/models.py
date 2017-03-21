@@ -55,22 +55,32 @@ class Category(models.Model):
         return self.name
 
 
-class Policy(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    subject = models.CharField(max_length=128)
-    description = models.CharField(max_length=1024)
-    country = models.ForeignKey(Country)
-    status = models.CharField(max_length=64)
-    category = models.ForeignKey(Category)
-
-    class Meta:
-        verbose_name_plural = 'Policies'
+class Status(models.Model):
+    name = models.CharField(max_length=64)
 
     def __str__(self):
         return self.name
 
     def __unicode__(self):
         return self.name
+
+
+class Policy(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    subject = models.CharField(max_length=128)
+    description = models.CharField(max_length=1024)
+    country = models.ForeignKey(Country)
+    status = models.ForeignKey(Status)
+    category = models.ForeignKey(Category)
+
+    class Meta:
+        verbose_name_plural = 'Policies'
+
+    def __str__(self):
+        return self.subject
+
+    def __unicode__(self):
+        return self.subject
 
 
 class UserProfile(models.Model):

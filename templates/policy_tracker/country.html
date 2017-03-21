@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block body_block %}
-  <div class="col country-header text-center" style="background-image: url('{{MEDIA_URL}}country_images/{{country.background_image}}');">
+  <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}
+                                                                       {{ image|slice:"-47:" }}{% endwith %});">
     <div class="transparent">
       <h1 class="align-self-center">{{ country.name }}</h1>
     </div>

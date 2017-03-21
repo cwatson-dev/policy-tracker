@@ -62,9 +62,13 @@
 							<br/><br/>
 							<div class="col-md-10 offset-md-1">
 								<div class="row">
-									<h3>Hello again, {{user.first_name}} {{user.last_name}}.</h3>
+									{% if user.first_name and user.last_name %}
+										<h3>Hello again, {{user.first_name}} {{user.last_name}}.</h3>
+									{% else %}
+										<h3>Welcome back to Policy Tracker. Your profile details are incomplete, please correct this <a href="#stuff">here</a>.</h3>
+									{% endif %}
 									<h5>You are logged in as <span style="color: #5cb85c;">{{user.username}}</span>.</h5>
-									{% if logins %}
+									{% if logins|length > 1 %}
 										<h5>Currently, you have connected your
 											{% for login in logins %}
 												{{login}}
@@ -73,7 +77,6 @@
 												Why not connect another account on the <a style="text-decoration: none;" href="{% url 'profile_settings' %}">Profile Settings</a> page?
 											{% endif %}
 										</h5>
-
 									{% else %}
 										<h5>You haven't yet connected any Social Accounts yet. Change this on the <a href="{% url 'profile_settings' %}">Profile Settings</a> page.</h5>
 									{% endif %}
@@ -92,7 +95,7 @@
 					<div class="col-md-10 offset-md-1 text-center description">
 						<h4>Welcome to Policy Tracker! Our aim is to provide users with an environment where they can add, update and follow the policies and promises of governing bodies from around the world.</h4>
 						<br/>
-						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed FAQs section, check out both the <a href="#">About</a> page and <a href="#">Updates</a> page.</h4>
+						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed FAQs section, check out both the <a href="#">About</a> page and <a href="#">News</a> page.</h4>
 					</div>
 				</div>
 			</div>

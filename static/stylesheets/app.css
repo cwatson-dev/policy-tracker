@@ -47,6 +47,11 @@
   display: none;
 }
 
+.navbar-override {
+  padding: 0 5rem 0 0;
+  border: 1px solid gray;
+}
+
 @media (min-width: 1920px) {
   .login-inputs {
     font-size: 160%;
@@ -81,34 +86,6 @@
   margin-left: 10%;
 }
 
-.navbar-box {
-	width: 100%;
-	height: 8%;
-	border: 1px solid black;
-	z-index: 1000;
-	position: fixed; 
-	background-color:#ECECEC; 
-	color:gray;
-}
-
-
-.navbar-box a div {
-	text-align: center;
-	margin-top: 10%;
-}
-
-.navbar-box .row {
-	
-}
-
-.navbar-box a div:hover:not(.active) {
-	color: #7F7FFF;
-}
-
-.navbar-box a:active {
-	background-color: #7F7FFF;
-}
-	
 .country-header {
   padding-left: 0;
   padding-right: 0;
@@ -132,4 +109,16 @@
 
 #login_form {
   margin-top: 2%;
+}
+
+.text-center .nav-item {
+  margin: 0 5%;
+}
+
+.ml-auto .nav-item {
+  margin: 0 7%;
+}
+
+.active {
+  color: #0275d8 !important;
 }
