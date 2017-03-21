@@ -2,54 +2,34 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    - Register
+    Register
 {% endblock %}
 
 {% block body_block %}
-
-    <h1>Registration</h1>
-
-  </div>
+    <h1>Registration Page</h1>
+    <p></p>
     <div class="offset-md-2 col-md-8 login-box">
+    {% if registered %}
+    <p>
+        <strong>Thank you for registering!</strong>
+        <a href="{% url 'home' %}">Return to the homepage.</a><br />
+    </p>
+    {% else %}
+        <p>
+        Please complete the following fields.
+        </p>
+        <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
 
-      <!-- Check if registered -->
-      <div class="text-center">
-      {% if registered %}
-          <strong>Thank you for registering!</strong>
-          <a href="{% url 'home' %}">Return to the homepage.</a><br />
-      {% else %}
-          <h3>Please complete the following fields</h3>
+        {% csrf_token %}
 
-    </div>
-      <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
-          {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" class="form-control" id="username">
-        </div>
-        <div class="form-group">
-          <label for="first_name">First name:</label>
-          <input type="text" class="form-control" id="first_name">
-        </div>
-        <div class="form-group">
-          <label for="last_name">Last name:</label>
-          <input type="text" class="form-control" id="last_name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" class="form-control" id="password">
-        </div>
-        <div class="form-group">
-          <label for="confirm_password">Password:</label>
-          <input type="password" class="form-control" id="confirm_password">
-        </div>
+        <!-- Display each form -->
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+
+        <!-- Provide a button to click to submit the form. -->
         <input type="submit" name="submit" value="Register" />
-      </form>
-    </div>
-  </div>
+
+        </form>
     {% endif %}
-    {% endblock %}
+  </div>
+{% endblock %}
