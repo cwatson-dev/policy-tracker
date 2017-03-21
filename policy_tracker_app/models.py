@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.deconstruct import deconstructible
 from policy_tracker_project.settings import MEDIA_ROOT
+from validators.file_validators import FileValidator
 
 @deconstructible
 class UploadToPathAndRename(object):
@@ -15,7 +16,10 @@ class UploadToPathAndRename(object):
 
     def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
-        filename = '{}.{}'.format(uuid.uuid4().hex, ext)
+        if ext == 'jpeg':
+            ext = 'jpg'
+        file_prefix = str(uuid.uuid4())[-12:]
+        filename = '{}.{}'.format(file_prefix, ext)
         # return the whole path to the file
         return os.path.join(self.sub_path, filename)
 
@@ -23,8 +27,8 @@ class Country(models.Model):
     name = models.CharField(max_length=64, unique=True)
     inPower = models.CharField(max_length=64)
     description = models.CharField(max_length=500)
-    background_image = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'country_images')), blank = True)
-    map_image = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'map_images')), blank = True)
+    background_image = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'country_images')), validators=[FileValidator(min_size=1*500, max_size=10*1024*1024, allowed_mimetypes=('image/png', 'image/jpg', 'image/jpeg',), allowed_extensions=('png', 'jpg', 'jpeg',))], blank = True)
+    map_image = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'map_images')), validators=[FileValidator(min_size=1*500, max_size=10*1024*1024, allowed_mimetypes=('image/png', 'image/jpg', 'image/jpeg',), allowed_extensions=('png', 'jpg', 'jpeg',))], blank = True)
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
@@ -87,7 +91,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'profile_images')), blank = True)
+    picture = models.ImageField(upload_to=UploadToPathAndRename(os.path.join(MEDIA_ROOT, 'profile_images')), validators=[FileValidator(min_size=1*500, max_size=10*1024*1024, allowed_mimetypes=('image/png', 'image/jpg', 'image/jpeg',), allowed_extensions=('png', 'jpg', 'jpeg',))], blank = True)
 
     def __str__(self):
         return self.user.username
