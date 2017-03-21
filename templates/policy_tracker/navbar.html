@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0 1rem; border-right: 1px solid gray; background-color: #ffffff;">
-		<img src="{% static '/images/PolicyTrackerNavBar.svg' %}" width="150" height="75" class="d-inline-block align-top" alt="">
+		<img src="{% static '/images/PolicyTrackerNavBar.png' %}" width="150" height="75" class="d-inline-block align-top" alt="">
 	</a>
 
   <div class="collapse navbar-collapse text-center" id="navbarSupportedContent" style="font-size: 150%;">
@@ -14,7 +14,7 @@
         <a class="nav-link {% if nbar == 'countries' %}active{% endif %}" href="{% url 'countries' %}">Countries<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link{% if nbar == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
+        <a class="nav-link {% if nbar == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">News</a>
@@ -27,7 +27,7 @@
 	      </li>
 			{% else %}
 			<li class="nav-item">
-				<a class="nav-link{% if nbar == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
+				<a class="nav-link {% if nbar == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'logout' %}">Logout</a>
