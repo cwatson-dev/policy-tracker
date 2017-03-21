@@ -17,7 +17,7 @@
         <a class="nav-link {% if nbar == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
+        <a class="nav-link {% if nbar == 'news' %}active{% endif %}" href="{% url 'news' %}">News</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

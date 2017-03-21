@@ -242,3 +242,11 @@ def faq(request):
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
     return render(request, 'policy_tracker/faq.html', context_dict)
+
+def news(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    context_dict['nbar'] = 'news'
+    return render(request, 'policy_tracker/news.html', context_dict)

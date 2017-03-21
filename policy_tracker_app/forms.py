@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from policy_tracker_app.models import Country, Policy, Category, UserProfile
+from django.contrib.auth.password_validation import validate_password
 
 class UserForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), help_text="Please retype password")
@@ -12,6 +13,7 @@ class UserForm(forms.ModelForm):
             'password': forms.PasswordInput(attrs={"class":"test"}),
         }
 
+    # check two passwords are the same before allowing user to submit
     def clean(self):
         cleaned_data = super(UserForm, self).clean()
         if cleaned_data['password'] != cleaned_data['confirm_password']:
