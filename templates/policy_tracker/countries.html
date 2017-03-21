@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
+<div class="container shift-right">
   <div class="row">
     <div class="col-md-12">
       <h1 class=page-header>Countries</h1>
@@ -14,15 +14,22 @@
     {% if countries %}
       {% for country in countries %}
         <div class="col-md-4">
-          <div class="img-thumbnail country-box">
-            <a href="#">
-              <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
-                        {% endwith %}" alt="{{ country.name }} map flag" height="250px" >
-              <div class="caption">
-                <p>{{ country.name }}</p>
+            <label>
+              <input type="checkbox"/>
+              <div class="card country-box">
+                <div class="front">
+                  <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
+                            {% endwith %}" alt="{{ country.name }} map flag" height="250px">
+                  <div class="caption">
+                    <p>{{ country.name }}</p>
+                  </div>
+                </div>
+                <div class="back">
+                  {{ country.inPower }} <!--add link to governing body page-->
+                  <a href="{{ country.slug }}">See more...</a>
+                </div>
               </div>
-            </a>
-          </div>
+            </label>
         </div>
       {% endfor %}
     {% else %}
