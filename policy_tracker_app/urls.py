@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^logout/$', views.user_logout, name='logout'),
 	url(r'^restricted/$', views.restricted, name='restricted'),
 	url(r'^profile/settings/$', views.profile_settings, name='profile_settings'),
-    url(r'^profile/settings/password/$', views.profile_password, name='profile_password')
+    url(r'^profile/settings/password/$', views.profile_password, name='profile_password'),
+	url(r'^contactus/$', views.contactus, name='contactus'),
 ]

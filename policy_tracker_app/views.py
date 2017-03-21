@@ -22,7 +22,7 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
-    return render(request, 'rango/about.html', context_dict)
+    return render(request, 'policy_tracker/about.html', context_dict)
 
 def register(request):
     registered = False
@@ -159,3 +159,10 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+
+def contactus(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    return render(request, 'policy_tracker/contactus.html', context_dict)
