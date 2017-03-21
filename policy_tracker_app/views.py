@@ -92,7 +92,6 @@ def countries(request):
 #
 #     return render(request, 'policy_tracker/add_country.html', {"form": form})
 
-
 def register(request):
     registered = False
 
@@ -229,3 +228,17 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+
+def contactus(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    return render(request, 'policy_tracker/contactus.html', context_dict)
+
+def faq(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    context_dict['last_visit'] = request.session['last_visit']
+    return render(request, 'policy_tracker/faq.html', context_dict)
