@@ -11,4 +11,5 @@ urlpatterns = [
 	url(r'^profile/settings/$', views.profile_settings, name='profile_settings'),
     url(r'^profile/settings/password/$', views.profile_password, name='profile_password'),
 	url(r'^contactus/$', views.contactus, name='contactus'),
+	url(r'^faq/$', views.faq, name='faq'),
 ]
