@@ -101,21 +101,21 @@ def countries(request):
     return render(request, 'policy_tracker/countries.html', context_dict)
 
 
-# def add_country(request):
-#     form = CountryForm()
-#
-#     if request.method == 'POST':
-#         form = CountryForm(request.POST)
-#
-#     if form.is_valid():
-#         country = form.save(commit=True)
-#         print(country, country.slug)
-#         return countries(request)
-#
-#     else:
-#         print(form.errors)
-#
-#     return render(request, 'policy_tracker/add_country.html', {"form": form})
+def add_country(request):
+    form = CountryForm()
+
+    if request.method == 'POST':
+        form = CountryForm(request.POST)
+
+    if form.is_valid():
+        country = form.save(commit=True)
+        print(country, country.slug)
+        return countries(request)
+
+    else:
+        print(form.errors)
+
+    return render(request, 'policy_tracker/add_country.html', {"form": form})
 
 def register(request):
     if request.user.is_authenticated:

@@ -23,11 +23,17 @@ class UserProfileForm(forms.ModelForm):
         fields = ('website', 'picture')
 
 class CountryForm(forms.ModelForm):
-    name = forms.CharField(max_length=64, help_text="Please enter the country name.")
-    inPower = forms.CharField(max_length=64, help_text="Please enter the governing body/ruler.")
-    map_image_url = forms.CharField(disabled=True)
+    name = forms.CharField(max_length=128, help_text="Please enter the country name.")
+    partyInPower = forms.CharField(max_length=128, help_text="Please enter the governing body/ruler.")
+    startDate = forms.DateField()
+    titleOfHead = forms.CharField(max_length=128)
+    headOfState = forms.CharField(max_length=128)
+    description = forms.CharField(widget=forms.Textarea)
+    background_image = forms.ImageField()
+    map_image = forms.ImageField()
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Country
-        fields = ('name', 'inPower', 'description', 'background_image')
+        fields = ('name', 'partyInPower', 'startDate', 'titleOfHead', 'description', 'background_image',
+                  'map_image')
