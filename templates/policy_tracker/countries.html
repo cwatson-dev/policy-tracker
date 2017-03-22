@@ -8,18 +8,21 @@
 {% block body_block %}
 <div class="container shift-right">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <h1 class=page-header>Countries</h1>
+    </div>
+    <div class="col-md-6">
+      <a href="add_country" class="btn btn-success" role="button">Add Country</a>
     </div>
     {% if countries %}
       {% for country in countries %}
         <div class="col-md-4">
-            <label>
-              <input type="checkbox"/>
+            <label class="flip-box">
+              <input type="checkbox" style="display: none"/>
               <div class="card country-box">
                 <div class="front">
                   <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-38:"}}
-                            {% endwith %}" alt="{{ country.name }} map flag"><br/>
+                            {% endwith %}" alt="{{ country.name }} map flag">
                   <div class="caption">
                     <p>{{ country.name }}</p>
                   </div>
