@@ -1,5 +1,6 @@
 {% extends 'policy_tracker/base.html' %}
 {% load staticfiles %}
+{% load index from policy_tracker_app_template_tags %}
 
 {% block title_block %}
     - Countries
@@ -12,7 +13,7 @@
       <h1 class=page-header>Countries</h1>
     </div>
     <div class="col-md-6">
-      <a href="add_country" class="btn btn-success" role="button">Add Country</a>
+      <a href="add_country" class="btn btn-outline-primary btn-lg" role="button">Add Country</a>
     </div>
     {% if countries %}
       {% for country in countries %}
@@ -28,8 +29,9 @@
                   </div>
                 </div>
                 <div class="back align-self-center">
-                  {{ country.inPower }} <!--add link to governing body page-->
-                  <a href="{{ country.slug }}" style="text-decoration: none">See more...</a>
+                  <i class="fa fa-briefcase status-icon bs-light-blue"></i><hr/>
+                  <h3>Total Policies: <span class="bs-light-blue">{{ policies|index:forloop.counter0|length }}</span></h3><br/>
+                  <a href="{{ country.slug }}" class="btn btn-secondary btn-lg" role="button">See more...</a>
                 </div>
               </div>
             </label>

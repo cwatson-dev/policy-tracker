@@ -90,7 +90,10 @@ def country(request, country_name_slug):
 
 def countries(request):
     country_list = Country.objects.all()
-    context_dict = {'countries': country_list}
+    policy_list = []
+    for country in country_list:
+        policy_list.append(Policy.objects.filter(country=country))
+    context_dict = {'countries': country_list, 'policies': policy_list}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['last_visit'] = request.session['last_visit']
