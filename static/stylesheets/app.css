@@ -26,6 +26,11 @@
   color: #5bc0de;
 }
 
+.country-box {
+  border: 2px solid #373737;
+  margin-bottom: 30px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -241,4 +246,78 @@
 
 .bs-red {
   color: #d9534f;
+}
+.shift-right {
+  margin-left: 29%;
+}
+
+/*hovering card code*/
+.flip-box {
+  position: relative;
+  top: 200px;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: block;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 600ms;
+  transition: all 600ms;
+  z-index: 20;
+}
+
+  .card div {
+    background: #FFF;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 2px;
+  }
+
+  .card .front {
+    position: relative;
+    margin: auto;
+    width: 300px;
+    height: 250px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+  .front img {
+    max-width: 300px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+  }
+
+  .card .back {
+    padding-bottom: 125px;
+    position: absolute;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+
+.flip-box:hover .card {
+  -webkit-transform: rotateX(20deg);
+  transform: rotateX(20deg);
+  box-shadow: 0 20px 20px rgba(50,50,50,.2);
+}
+
+:checked + .card {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+}
+
+.flip-box:hover :checked + .card {
+  transform: rotateX(160deg);
+  -webkit-transform: rotateX(160deg);
+  box-shadow: 0 20px 20px rgba(255,255,255,.2);
 }
