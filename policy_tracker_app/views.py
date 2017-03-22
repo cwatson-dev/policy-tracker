@@ -56,13 +56,35 @@ def about(request):
 
 def country(request, country_name_slug):
     context_dict = {}
+    policy_statuses = {'No Progress': 0, 'In Progress': 0, "Achieved": 0, 'Broken': 0}
+    status_fillers = []
 
     try:
         country = Country.objects.get(slug=country_name_slug)
+        policies = Policy.objects.filter(country=country)
         context_dict['country'] = country
-    except:
-        context_dict['country'] = None
+        context_dict['policies'] = policies
+        for policy in policies:
+            policy_statuses[policy.status.name] += 1
+        noProgress = policy_statuses['No Progress']
+        inProgress = policy_statuses['In Progress']
+        achieved = policy_statuses['Achieved']
+        broken = policy_statuses['Broken']
+        policy_statuses = [noProgress, inProgress, achieved, broken]
+        if len(policies) > 0:
+            status_fillers = [
+                ((float(noProgress)/float(len(policies)))*100),
+                ((float(inProgress)/float(len(policies)))*100),
+                ((float(achieved)/float(len(policies)))*100),
+                ((float(broken)/float(len(policies)))*100),
+            ]
 
+    except Country.DoesNotExist:
+        context_dict['country'] = None
+        context_dict['policies'] = None
+
+    context_dict['policy_statuses'] = policy_statuses
+    context_dict['status_fillers'] = status_fillers
     return render(request, 'policy_tracker/country.html', context_dict)
 
 
@@ -93,35 +115,40 @@ def countries(request):
 #     return render(request, 'policy_tracker/add_country.html', {"form": form})
 
 def register(request):
-    registered = False
-
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            profile.save()
-
-            registered = True
-        else:
-            print(user_form.errors, profile_form.errors)
+    if request.user.is_authenticated:
+        return render(request, 'policy_tracker/register.html',
+                  {'logged_in': True})
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        registered = False
 
-    return render(request, 'policy_tracker/register.html',
-              {'user_form': user_form, 'profile_form': profile_form,
-               'registered': registered})
+        if request.method == 'POST':
+            user_form = UserForm(data=request.POST)
+            profile_form = UserProfileForm(data=request.POST)
+
+            if user_form.is_valid() and profile_form.is_valid():
+                user = user_form.save()
+                user.set_password(user.password)
+                user.save()
+
+                profile = profile_form.save(commit=False)
+                profile.user = user
+
+                if 'picture' in request.FILES:
+                    profile.picture = request.FILES['picture']
+
+                profile.save()
+
+                registered = True
+            else:
+                print(user_form.errors, profile_form.errors)
+        else:
+            user_form = UserForm()
+            profile_form = UserProfileForm()
+
+        return render(request, 'policy_tracker/register.html',
+                  {'user_form': user_form, 'profile_form': profile_form,
+                   'registered': registered})
+
 
 
 def user_login(request):

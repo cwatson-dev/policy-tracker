@@ -6,10 +6,51 @@
 {% endblock %}
 
 {% block body_block %}
-  <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}
-                                                                       {{ image|slice:"-47:" }}{% endwith %});">
-    <div class="transparent">
-      <h1 class="align-self-center">{{ country.name }}</h1>
+  {% if country %}
+    <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}
+                                                                         {{ image|slice:"-38:" }}{% endwith %});">
+      <div class="transparent">
+        <h1 class="align-self-center">{{ country.name }}</h1>
+      </div>
     </div>
-  </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6 policy-box">
+            <h2>Policy Overview:</h2>
+            {% for status in status_fillers %}
+              <div class="row align-self-center policy-status" style="font-size: 1.7rem;">
+                <i class="fa fa-{% cycle 'clock-o' 'wrench' 'thumbs-up' 'thumbs-down' %} status-icon"
+                   style="color: {% cycle "#0275d8" "#f0ad4e" "#5cb85c" "#d9534f" %};"></i>
+                <div class="status-bar">
+                  <div class="status-filler stripe-{% cycle "blue" "yellow" "green" "red"%}" style="width:
+                       {{ status }}%; {% if status == 0 %} border-right: 0;{% endif %}">
+                  </div>
+                </div>
+                {% cycle policy_statuses.0 policy_statuses.1 policy_statuses.2 policy_statuses.3 %}
+              </div>
+            {% endfor %}
+            <h3>Total number of Policies: <span>{{ policies|length }}</span></h3>
+          </div>
+          <div class="col-md-6 policy-box">
+            <h5>
+              {% load intword from humanize %}
+              The {{ country.name }} has a population of {{ country.population|intword }} and its capital city is {{ country.capital }}.
+              The {{ country.demonym }} government is led by the {{ country.titleOfHead }} - currently, {{ country.headOfState }}.
+              The government is currently controlled by the {{ country.partyInPower }} party with the {{ country.titleOfHead }} as the leader.
+              <br/><br/>
+              Presently, this site tracks <span class="bs-light-blue">{% with policies|length as no_policies %}{{ no_policies }}</span> polic{{ no_policies|pluralize:"y,ies" }}{% endwith %} from the {{ country.partyInPower }} manifesto.<br/>
+              <span class="bs-blue">{{ policy_statuses.0 }}</span> polic{{ policy_statuses.0|pluralize:"y has not started yet and is,ies have not started yet and are" }} considered <span class="bs-blue">Not Yet In Progress</span>.
+              <span class="bs-yellow">{{ policy_statuses.1 }}</span> polic{{ policy_statuses.1|pluralize:"y has seen some progress and is,ies have seen some progress and are" }} considered <span class="bs-yellow">In Progress</span>.
+              <span class="bs-green">{{ policy_statuses.2 }}</span> polic{{ policy_statuses.2|pluralize:"y has been successfully implemented and is,ies have been successfully implemented and are" }} considered <span class="bs-green">Completed</span>.
+              <span class="bs-red">{{ policy_statuses.3 }}</span> polic{{ policy_statuses.3|pluralize:"y has been abandoned and is,ies have been abandoned and are" }} considered <span class="bs-red">Broken</span>.
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    No such country exists yet!
+  {% endif %}
+
 {% endblock %}

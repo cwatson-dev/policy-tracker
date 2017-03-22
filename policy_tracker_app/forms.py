@@ -13,9 +13,9 @@ class UserForm(forms.ModelForm):
         }
 
     def clean(self):
-        cleaned_data = super(UserForm, self).clean()
         if cleaned_data['password'] != cleaned_data['confirm_password']:
             raise forms.ValidationError("The two passwords entered do not match.")
+        cleaned_data = super(UserForm, self).clean()
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -26,6 +26,7 @@ class CountryForm(forms.ModelForm):
     name = forms.CharField(max_length=64, help_text="Please enter the country name.")
     inPower = forms.CharField(max_length=64, help_text="Please enter the governing body/ruler.")
     map_image_url = forms.CharField(disabled=True)
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Country

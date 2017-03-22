@@ -19,7 +19,7 @@ def populate():
 	u.is_active = 1
 	u.save()
 
-	statuses = ["No Progress","In Progress", "Acheived", "Broken"]
+	statuses = ["No Progress","In Progress", "Achieved", "Broken"]
 
 	for status in statuses:
 		s = add_status(status)

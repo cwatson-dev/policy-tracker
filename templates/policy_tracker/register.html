@@ -2,18 +2,24 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Register
+    - Register
 {% endblock %}
 
 {% block body_block %}
     <h1>Registration Page</h1>
     <p></p>
     <div class="offset-md-2 col-md-8 login-box">
-    {% if registered %}
-    <p>
-        <strong>Thank you for registering!</strong>
-        <a href="{% url 'home' %}">Return to the homepage.</a><br />
-    </p>
+    {% if logged_in %}
+      <p>
+          <strong>You are already logged in!</strong><br />
+          If you want to register a new acount, <a href="{% url 'logout' %}">Logout</a> first.<br/>
+          Otherwise, <a href="{% url 'home' %}">return to the homepage</a>.<br />
+      </p>
+    {% elif registered %}
+      <p>
+          <strong>Thank you for registering!</strong>
+          <a href="{% url 'home' %}">Return to the homepage</a>.<br />
+      </p>
     {% else %}
         <p>
         Please complete the following fields.
