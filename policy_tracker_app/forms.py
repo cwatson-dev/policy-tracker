@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from policy_tracker_app.models import Country, Policy, Category, UserProfile
 
 class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     confirm_password = forms.CharField(widget=forms.PasswordInput(), help_text="Please retype password")
 
     class Meta:
@@ -13,9 +15,11 @@ class UserForm(forms.ModelForm):
         }
 
     def clean(self):
+        validate_password('password')
+        validate_password('confirm_password')
+        cleaned_data = super(UserForm, self).clean()
         if cleaned_data['password'] != cleaned_data['confirm_password']:
             raise forms.ValidationError("The two passwords entered do not match.")
-        cleaned_data = super(UserForm, self).clean()
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
