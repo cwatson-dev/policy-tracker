@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from policy_tracker_app.models import Country, Policy, Category, UserProfile
 from django.contrib.auth.password_validation import validate_password
 
+#test imports
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
 class UserForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), help_text="Please retype password")
 

@@ -15,4 +15,6 @@ urlpatterns = [
 	url(r'^contactus/$', views.contactus, name='contactus'),
 	url(r'^faq/$', views.faq, name='faq'),
 	url(r'^news/$', views.news, name='news'),
+	#test
+	url(r'^accounts/update/(?P<pk>[\-\w]+)/$', views.edit_user, name='account_update'),
 ]
