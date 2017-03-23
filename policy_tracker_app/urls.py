@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^profile/settings/password/$', views.profile_password, name='profile_password'),
 	url(r'^contactus/$', views.contactus, name='contactus'),
 	url(r'^faq/$', views.faq, name='faq'),
+	url(r'^news/$', views.news, name='news'),
 ]
