@@ -13,9 +13,12 @@
       <h1 class=page-header>Countries</h1>
     </div>
     <div class="col-md-6">
+      <!-- allow used to add country -->
       <a href="add_country" class="btn btn-outline-primary btn-lg" role="button">Add Country</a>
     </div>
+    <!-- if a country has been added -->
     {% if countries %}
+    <!-- if country present, allow it to be flipped to see policys for country -->
       {% for country in countries %}
         <div class="col-md-4">
             <label class="flip-box">
@@ -25,6 +28,7 @@
                   {% if not country.map_image %}
                     <i class="fa f-globe bs-green"></i>
                   {% else %}
+                  <!-- Display flag of country in flipbox -->
                     <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-34:"}}
                             {% endwith %}" alt="{{ country.name }} map flag">
                   {% endif %}
@@ -42,6 +46,7 @@
         </div>
       {% endfor %}
     {% else %}
+    <!-- else inform user no countries are present -->
       <strong>No countries present</strong>
     {% endif %}
  </div>
