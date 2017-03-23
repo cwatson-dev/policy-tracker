@@ -10,16 +10,18 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
-        widgets = {
-            'password': forms.PasswordInput(attrs={"class":"test"}),
-        }
 
     def clean(self):
-        validate_password('password')
-        validate_password('confirm_password')
-        cleaned_data = super(UserForm, self).clean()
-        if cleaned_data['password'] != cleaned_data['confirm_password']:
-            raise forms.ValidationError("The two passwords entered do not match.")
+        password1 = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('confirm_password')
+
+        if password1 != password2:
+            raise forms.ValidationError('Passwords do not match.', code='invalid')
+
+        password1 = validate_password(password1)
+        password2 = validate_password(password2)
+
+        return self.cleaned_data
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

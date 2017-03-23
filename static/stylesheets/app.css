@@ -26,6 +26,14 @@
   color: #5bc0de;
 }
 
+.box-spacer {
+  margin: 0 auto;
+}
+
+.box-bottom {
+  padding: 0 2%;
+}
+
 .country-box {
   border: 2px solid #373737;
   margin-bottom: 30px;
@@ -85,14 +93,30 @@
   margin-bottom: 2%;
   height: 20rem;
   background-position: center;
-  background-size: 120%;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 
+.shift-right {
+  margin-top: 100px;
+  margin-left: 22%;
+}
+
+@media (min-width: 1700px) {
+  .shift-right {
+    margin-top: 100px;
+    margin-left: 25%;
+  }
+}
+
 @media (min-width: 1920px) {
+  .shift-right {
+    margin-top: 100px;
+    margin-left: 29%;
+  }
+
   .country-header {
-    height: 25rem;
-    background-size: 110%;
+    height: 30rem;
   }
 
   .login-inputs {
@@ -158,6 +182,10 @@
   color: #0275d8 !important;
 }
 
+.policy-boxes {
+  margin-top: 6%;
+}
+
 .policy-status {
   margin: 4% 2%;
 }
@@ -176,7 +204,7 @@
 }
 
 .status-bar {
-  width: 80%;
+  width: 73%;
   margin-right: 2%;
   background-color: #ffffff;
   border: 1px solid black;
@@ -188,6 +216,10 @@
   border-radius: 3px;
   background-color: #000000;
   border-right: 1px solid black;
+}
+
+.policy-count {
+  margin: 0 auto;
 }
 
 .stripe-blue {
@@ -249,12 +281,7 @@
 }
 
 .bs-purple {
-  color: #993355
-}
-
-.shift-right {
-  margin-top: 100px;
-  margin-left: 29%;
+  color: #993355;
 }
 
 /*hovering card code*/
@@ -326,4 +353,16 @@
   transform: rotateX(180deg);
   -webkit-transform: rotateX(180deg);
   box-shadow: 0 20px 20px rgba(255,255,255,.2);
+}
+
+.controls input {
+  width: 40%;
+}
+
+.controls span {
+  display: block;
+}
+
+.alert {
+  color: #d9534f;
 }

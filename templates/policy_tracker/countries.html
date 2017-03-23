@@ -22,8 +22,12 @@
               <input type="checkbox" style="display: none"/>
               <div class="card country-box">
                 <div class="front">
-                  <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-34:"}}
+                  {% if not country.map_image %}
+                    <i class="fa f-globe bs-green"></i>
+                  {% else %}
+                    <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-34:"}}
                             {% endwith %}" alt="{{ country.name }} map flag">
+                  {% endif %}
                   <div class="caption">
                     <p>{{ country.name }}</p>
                   </div>

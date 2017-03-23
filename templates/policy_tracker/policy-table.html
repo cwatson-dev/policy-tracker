@@ -1,0 +1,22 @@
+<table id="policyTable" class="table tablesorter">
+  <thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Category</th>
+        <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for policy in policies %}
+      <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ policy.subject }}</td>
+          <td class="text-center align-self-center"><i class="fa fa-{{ policy.status.fa_icon }} status-icon" style="color: #{{ policy.status.fa_colour }}"></i></td>
+          <td class="text-center align-self-center"><i class="fa fa-{{ policy.category.fa_icon }} status-icon" style="color: #{{ policy.category.fa_colour }}"></i></td>
+          <td>{{ policy.description }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

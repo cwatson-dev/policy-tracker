@@ -85,6 +85,7 @@ def country(request, country_name_slug):
 
     context_dict['policy_statuses'] = policy_statuses
     context_dict['status_fillers'] = status_fillers
+    context_dict['policy_table'] = True
     return render(request, 'policy_tracker/country.html', context_dict)
 
 

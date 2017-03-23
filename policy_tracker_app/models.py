@@ -120,6 +120,8 @@ class Country(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
+    fa_icon = models.CharField(max_length=64)
+    fa_colour = models.CharField(max_length=6)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -133,6 +135,8 @@ class Category(models.Model):
 
 class Status(models.Model):
     name = models.CharField(max_length=64)
+    fa_icon = models.CharField(max_length=64)
+    fa_colour = models.CharField(max_length=6)
 
     def __str__(self):
         return self.name

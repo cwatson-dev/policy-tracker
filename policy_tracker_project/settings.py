@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'social_django',
+    'bootstrap_toolkit',
     'validators',
     'policy_tracker_app',
 ]
