@@ -17,6 +17,7 @@
             <form id="login_form" method="post" action="{% url 'login' %}" class="text-center">
               {% csrf_token %}
               <div style="color: red">{{ error }}</div><br/>
+              <!--allow user to log in -->
               {% if username %}
                 <input type="text" name="username" size="30" value="{{ username }}" class="login-inputs"/>
                 <br/><br/>
@@ -38,9 +39,11 @@
           <div class="col-md-6 text-center login-right">
             <br/>
             <div class="col align-self-center">
+              <!--  if user does not have an account, allow them to register an account -->
               <a href="{% url 'register' %}">Don't have an account? Sign up here!</a>
             </div>
             <br/>
+            <!-- allow user to log in with social media accounts -->
             <div class="col-md-10 offset-md-1 align-self-center text-center">
               <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google" width="100%">
                 <span class="fa fa-google"></span>Sign in with Google</a><br><br>
