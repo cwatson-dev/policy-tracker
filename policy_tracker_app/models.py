@@ -162,6 +162,12 @@ class Policy(models.Model):
     def __unicode__(self):
         return self.subject
 
+class Comment(models.Model):
+    policy = models.ForeignKey(Policy)
+    user = models.ForeignKey(User)
+    text = models.TextField()
+    approved = models.BooleanField(default=True)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)

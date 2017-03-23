@@ -23,5 +23,4 @@ urlpatterns = [
     url(r'^', include('policy_tracker_app.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^oauth/', include("social_django.urls", namespace="social")),
-    url(r'^comments', include('django_comments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
