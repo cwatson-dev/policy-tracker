@@ -8,3 +8,4 @@ requests==2.13.0
 Django==1.10
 social-auth-app-django==1.1.0
 django-bootstrap-toolkit==2.15.0
+django_comments

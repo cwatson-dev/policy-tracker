@@ -1,5 +1,5 @@
 from django.contrib import admin
-from policy_tracker_app.models import Country, Policy, Category, UserProfile
+from policy_tracker_app.models import Country, Policy, Category, UserProfile, Comment
 
 class CountryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
@@ -14,3 +14,4 @@ admin.site.register(Country, CountryAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Category)
 admin.site.register(UserProfile)
+admin.site.register(Comment)
