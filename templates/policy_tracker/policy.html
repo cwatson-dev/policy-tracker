@@ -1,0 +1,50 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - Policy {% if policy %}{{ policy.subject }}{% endif %}
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+  <div class="row">
+    {% if policy %}
+      <h1>Policy {{ policy.subject }}</h1><br/>
+      <div class="offset-md-1 col-md-10 login-box">
+        <br/><br/>
+        <div class="row">
+          <div class="col-md-5 offset-md-1">
+            <h5 class="top-spacer">
+              <i class="fa fa-{{ policy.status.fa_icon }} status-icon icon-spacer" style="color: #{{ policy.status.fa_colour }}"></i>{{ policy.status.name }}
+            </h5><br/>
+            <h5 class="top-spacer">
+              <i class="fa fa-{{ policy.category.fa_icon }} status-icon icon-spacer" style="color: #{{ policy.category.fa_colour }}"></i>{{ policy.category.name }}
+            </h5><br/>
+            {% if policy.reference_url %}
+              <a href="{{ policy.reference_url }}" style="text-decoration: none;">
+                <h5 class="top-spacer">
+                  <i class="fa fa-book status-icon icon-spacer" style="color: #"></i>{{ policy.reference_url }}
+                </h5>
+              </a><br/>
+            {% endif %}
+            <a href="/countries/{{ policy.country.slug }}/" style="text-decoration: none;">
+              <h5 class="top-spacer">
+                <i class="fa fa-flag status-icon icon-spacer" style="color: #"></i>{{ policy.country.name }}
+              </h5>
+            </a><br/>
+          </div>
+          <div class="col-md-5">
+            <h3>Description</h3>
+            <h5>
+              {{ policy.description }}
+            </h5>
+          </div>
+        </div>
+        <br/>
+      </div>
+    {% else %}
+      <strong>No Policy exists under that ID. ({{ policy_id }})</strong>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

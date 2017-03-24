@@ -7,28 +7,31 @@
 
 {% load bootstrap_toolkit %}
 {% block body_block %}
-    <h1>Registration Page</h1>
+    <h1>Register</h1>
     <p></p>
     <div class="offset-md-2 col-md-8 login-box">
       <br/>
+      <!-- if logged in tell the user that they are, and to create a new account they need to log out -->
       {% if logged_in %}
         <h5>
             <strong>You are already logged in!</strong><br />
             If you want to register a new acount, <a href="{% url 'logout' %}">Logout</a> first.<br/>
             Otherwise, <a href="{% url 'home' %}">return to the homepage</a>.<br />
         </h5>
+      <!-- if just registered, diplay that they have just registered -->
       {% elif registered %}
         <h5>
             <strong>Thank you for registering!</strong>
             <a href="{% url 'home' %}">Return to the homepage</a>.<br />
         </h5>
+      <!-- if not logged in or registered, allow them to create a new account -->
       {% else %}
           <h5>Please complete the following fields.</h5><br/>
           <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
 
             {% csrf_token %}
 
-            <!-- Display each form -->
+            <!-- Display each form, the first allowing user to add username, password, the second adds their profile picture and website -->
             {{ user_form|as_bootstrap }}
             {{ profile_form|as_bootstrap }}
 

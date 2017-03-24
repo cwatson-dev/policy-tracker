@@ -13,6 +13,7 @@
 			      <img src="{% static 'images/PolicyTrackerLogoTransparent.png' %}" width="100%" class="home-logo">
 					</div>
 					<div class="col-md-5 offset-md-1 align-self-center login-box">
+						<!-- if user has not logged in allow them too -->
 						{% if not user.is_authenticated %}
 							<div class="row">
 			          <div class="col-md-6">
@@ -36,6 +37,7 @@
 			          <div class="col-md-6 text-center">
 									<br/>
 			            <div class="col align-self-center">
+										<!-- allow users to log in with social media -->
 			              <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google sm-social" width="100%">
 			                <span class="fa fa-google"></span>Sign in with Google</a>
 										<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google btn-lg lg-social" width="100%">
@@ -62,18 +64,23 @@
 							<br/><br/>
 							<div class="col-md-10 offset-md-1">
 								<div class="row">
+									<!-- if user has first and last name, greet them -->
 									{% if user.first_name and user.last_name %}
 										<h3>Hello again, {{user.first_name}} {{user.last_name}}.</h3>
+										<!-- else promt user to update their information -->
 									{% else %}
 										<h3>Welcome back to Policy Tracker. Your profile details are incomplete, please correct this <a href="#stuff">here</a>.</h3>
+										<!-- display username if logged in -->
 									{% endif %}
 									<h5>You are logged in as <span style="color: #5cb85c;">{{user.username}}</span>.</h5>
 									{% if logins|length > 1 %}
+									<!-- display connected social media -->
 										<h5>Currently, you have connected your
 											{% for login in logins %}
 												{{login}}
 											{% endfor %}
 											{% if logins|length < 6 %}
+											<!-- if they have not connected other social media accounts, allow them -->
 												Why not connect another account on the <a style="text-decoration: none;" href="{% url 'profile_settings' %}">Profile Settings</a> page?
 											{% endif %}
 										</h5>
@@ -92,10 +99,11 @@
 					</div>
 				</div>
 				<div class="row">
+					<!-- basic site info and page links -->
 					<div class="col-md-10 offset-md-1 text-center description">
 						<h4>Welcome to Policy Tracker! Our aim is to provide users with an environment where they can add, update and follow the policies and promises of governing bodies from around the world.</h4>
 						<br/>
-						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed FAQs section, check out both the <a href="{% url 'about' %}">About</a> page and <a href="{% url 'news' %}">News</a> page.</h4>
+						<h4>Users are also able to add new Countries; if they find that the website isn't yet covering enough governments. For more info and a detailed <a style="text-decoration: none;" href="{% url 'faq' %}">FAQs</a> section, check out both the <a style="text-decoration: none;" href="{% url 'about' %}">About</a> page and <a style="text-decoration: none;" href="{% url 'news' %}">News</a> page. If you need to contact us, our details are on the <a style="text-decoration: none;" href="{% url 'contactus' %}">Contact Us</a> page.</h4>
 					</div>
 				</div>
 			</div>
