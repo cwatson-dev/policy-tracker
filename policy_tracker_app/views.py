@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, UserChangeForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 from social_django.models import UserSocialAuth
-from policy_tracker_app.models import Country, Policy, Category
-from policy_tracker_app.forms import UserForm, UserProfileForm
+from policy_tracker_app.models import Country, Policy, Category, Status
+from policy_tracker_app.forms import UserForm, UserProfileForm, CountryForm, PolicyForm
 
 
 def home(request):
@@ -102,21 +102,68 @@ def countries(request):
     return render(request, 'policy_tracker/countries.html', context_dict)
 
 
-# def add_country(request):
-#     form = CountryForm()
-#
-#     if request.method == 'POST':
-#         form = CountryForm(request.POST)
-#
-#     if form.is_valid():
-#         country = form.save(commit=True)
-#         print(country, country.slug)
-#         return countries(request)
-#
-#     else:
-#         print(form.errors)
-#
-#     return render(request, 'policy_tracker/add_country.html', {"form": form})
+@login_required
+def add_country(request):
+    if request.method == 'POST':
+        country_form = CountryForm(data=request.POST)
+
+        if country_form.is_valid():
+            country = country_form.save(commit=False)
+
+            if 'background_image' in request.FILES:
+                country.background_image = request.FILES['background_image']
+            if 'map_image' in request.FILES:
+                country.map_image = request.FILES['map_image']
+
+            country.save()
+
+            return HttpResponseRedirect('/countries/' + country.slug)
+        else:
+            print(country_form.errors)
+    else:
+        country_form = CountryForm()
+
+    return render(request, 'policy_tracker/add_country.html', {"country_form": country_form, 'add_country': True})
+
+@login_required
+def add_policy(request, country_name_slug):
+    context_dict = {}
+    try:
+        country = Country.objects.get(slug=country_name_slug)
+    except Country.DoesNotExist:
+        context_dict['country'] = None
+        return render(request, 'policy_tracker/add_policy.html', context_dict)
+
+    if request.method == 'POST':
+        policy_form = PolicyForm(data=request.POST)
+
+        if policy_form.is_valid():
+            policy = policy_form.save(commit=False)
+
+            policy.country = country
+
+            policy.save()
+
+            return HttpResponseRedirect('/policy/' + str(policy.id))
+        else:
+            print(policy_form.errors)
+    else:
+        policy_form = PolicyForm()
+
+
+    return render(request, 'policy_tracker/add_policy.html', {"policy_form": policy_form, 'country': country})
+
+
+@login_required
+def policy(request, policy_id):
+    try:
+        policy = Policy.objects.get(id=policy_id)
+    except Policy.DoesNotExist:
+        policy = None
+        return render(request, 'policy_tracker/policy.html', {'policy': policy, 'policy_id': policy_id})
+
+    return render(request, 'policy_tracker/policy.html', {'policy': policy})
+
 
 def register(request):
     if request.user.is_authenticated:
@@ -227,11 +274,6 @@ def profile_password(request):
     else:
         form = PasswordForm(request.user)
     return render(request, 'policy_tracker/profile_password.html', {'form': form})
-
-@login_required
-def profile(request):
-    context_dict['nbar'] = 'profile'
-    return render(request, 'policy_tracker/profile.html', context_dict)
 
 @login_required
 def user_logout(request):
