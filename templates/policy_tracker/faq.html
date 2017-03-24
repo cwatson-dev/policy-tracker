@@ -1,0 +1,35 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - FAQ
+{% endblock %}
+
+{% block body_block %}
+
+
+<h1>Freqently Asked Questions</h1>
+<!-- Display FAQs in a centered box -->
+<div class="offset-md-2 col-md-8 login-box">
+    <p>
+    <h4>  What is Policy tracker? </h4>
+    The object of our application is to give citizens around the world a method of holding their government
+    accountable for their campaign promises and allowing user discuss and rate the promises.
+    The application will follow the open source model, allowing users to add their country's government to
+    the website and subsequently add the promises and manifestos that government made during their
+    electoral campaign.
+    Upon adding these promises, users will be able to update them accordingly, allowing users to see
+    whether their government has achieved or broken the promises they made during their electoral campaign.
+    <h4>  Why did you create Policy Tracker? </h4>
+    Our application will give users the ability compile government electoral promises in one place, helping
+    to prevent the common occurrence of a government removing their website with all their manifesto and
+    promises in an attempt to make it harder to hold them accountable during their term.
+    <h4>  How did you come up with this idea? </h4>
+    We were influenced by the <a href="https://trudeaumetre.polimeter.org/">Trudeaumeter</a>. The Trudeaumeter
+    tracks Justin Trudeau's electoral promises while maintaining no political affiliations. The site enables Canadians
+    to hold Justin Trudeau's government accountable for their manifesto and measure what the government has achieved during
+    its term in office.
+    </p>
+</div>
+
+{% endblock %}

@@ -6,10 +6,90 @@
 {% endblock %}
 
 {% block body_block %}
-  <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}
-                                                                       {{ image|slice:"-47:" }}{% endwith %});">
-    <div class="transparent">
-      <h1 class="align-self-center">{{ country.name }}</h1>
+  {% if country %}
+    {% if country.background_image %}
+      <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}{{ image|slice:"-38:" }}{% endwith %});">
+    {% else %}
+      <div class="col country-header no-country-header text-center" style="background-image:url({{MEDIA_URL}}country_images/6a4e38f6bde7.png);">
+    {% endif %}
+      <div class="transparent">
+        <h1 class="align-self-center">{{ country.name }}</h1>
+      </div>
     </div>
-  </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row policy-boxes align-self-center">
+          <div class="col-md-6 align-self-center">
+            <div class="col-md-11 policy-box box-spacer">
+              <h2>Policy Overview</h2>
+              {% for status in status_fillers %}
+                <div class="row align-self-center policy-status" style="font-size: 1.7rem;">
+                  <i class="fa fa-{% cycle 'clock-o' 'wrench' 'thumbs-up' 'thumbs-down' %} status-icon"
+                     style="color: {% cycle "#0275d8" "#f0ad4e" "#5cb85c" "#d9534f" %};"></i>
+                  <div class="status-bar">
+                    <div class="status-filler stripe-{% cycle "blue" "yellow" "green" "red"%}" style="width:
+                         {{ status }}%; {% if status == 0 %} border-right: 0;{% endif %}">
+                    </div>
+                  </div>
+                  <span class="policy-count">{% cycle policy_statuses.0 policy_statuses.1 policy_statuses.2 policy_statuses.3 %}</span>
+                </div>
+              {% endfor %}
+              <h3>Total number of Policies: <span>{{ policies|length }}</span></h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-11 policy-box box-spacer">
+              <br/>
+              <h5>
+                {% load intword from humanize %}
+                {{ country.name }} has a population of {{ country.population|intword }} and its capital city is {{ country.capital }}.
+                The {{ country.demonym }} government is led by the {{ country.titleOfHead }} - currently, {{ country.headOfState }}.
+                The government is currently controlled by the {{ country.partyInPower }} party with the {{ country.titleOfHead }} as the leader.
+                <br/><br/>
+                Presently, this site tracks <span class="bs-light-blue">{% with policies|length as no_policies %}{{ no_policies }}</span> polic{{ no_policies|pluralize:"y,ies" }}{% endwith %} from the {{ country.partyInPower }}'s manifesto.<br/>
+                <span class="bs-blue">{{ policy_statuses.0 }}</span> polic{{ policy_statuses.0|pluralize:"y has not started yet and is,ies have not started yet and are" }} considered <span class="bs-blue">Not Yet In Progress</span>.
+                <span class="bs-yellow">{{ policy_statuses.1 }}</span> polic{{ policy_statuses.1|pluralize:"y has seen some progress and is,ies have seen some progress and are" }} considered <span class="bs-yellow">In Progress</span>.
+                <span class="bs-green">{{ policy_statuses.2 }}</span> polic{{ policy_statuses.2|pluralize:"y has been successfully implemented and is,ies have been successfully implemented and are" }} considered <span class="bs-green">Completed</span>.
+                <span class="bs-red">{{ policy_statuses.3 }}</span> polic{{ policy_statuses.3|pluralize:"y has been abandoned and is,ies have been abandoned and are" }} considered <span class="bs-red">Broken</span>.
+              </h5>
+              <br/>
+            </div>
+          </div>
+        </div><br/><br/>
+        <div class="row">
+          <div class="col-md-11 policy-box box-spacer box-bottom">
+            <br/>
+            <h4>Description</h4>
+            <p>
+              {{ country.headOfState }} has been in office for {{ country.startDate|timesince }}.
+            </p>
+            <p>
+              {{ country.description }}
+            </p>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/><br/>
+    {% if request.user.is_authenticated %}
+      <div class="policy-button add-policy-box">
+        <a href="add_policy" class="btn btn-primary btn-lg" role="button">Add Policy</a>
+      </div>
+    {% endif %}
+    <div class="container">
+      <div class="col-md-12">
+        {% if policies %}
+          <div class="row">
+            <div class="col-md-11 policy-box box-spacer box-bottom">
+              {% include 'policy_tracker/policy-table.html' %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    No such country exists yet!
+  {% endif %}
+
 {% endblock %}
