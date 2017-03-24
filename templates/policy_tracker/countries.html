@@ -13,17 +13,22 @@
       <h1 class=page-header>Countries</h1>
     </div>
     <div class="col-md-6">
-      <a href="add_country" class="btn btn-outline-primary btn-lg" role="button">Add Country</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'add_country' %}" class="btn btn-outline-primary btn-lg" role="button">Add Country</a>
+      {% else %}
+        <button class="btn btn-outline-primary btn-lg" disabled>Add Country</button>
+        <small>You need to login to Add Countries</small>
+      {% endif %}
     </div>
     {% if countries %}
       {% for country in countries %}
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-8">
             <label class="flip-box">
               <input type="checkbox" style="display: none"/>
               <div class="card country-box">
-                <div class="front">
+                <div class="front align-self-center">
                   {% if not country.map_image %}
-                    <i class="fa f-globe bs-green"></i>
+                    <i class="fa fa-globe bs-green"></i>
                   {% else %}
                     <img src="{% with country.map_image.url as img_url %}{{ img_url|slice:"-34:"}}
                             {% endwith %}" alt="{{ country.name }} map flag">
@@ -33,7 +38,7 @@
                   </div>
                 </div>
                 <div class="back align-self-center">
-                  <i class="fa fa-briefcase status-icon bs-light-blue"></i><hr/>
+                  <i class="fa fa-briefcase status-icon bs-purple"></i><hr/>
                   <h3>Total Policies: <span class="bs-light-blue">{{ policies|index:forloop.counter0|length }}</span></h3><br/>
                   <a href="{{ country.slug }}" class="btn btn-secondary btn-lg" role="button">See more...</a>
                 </div>

@@ -7,9 +7,11 @@
 
 {% block body_block %}
 <div class="container-fluid">
-  <div class="col-md-12">
+  <div class="col-md-12 profile-settings">
     <h2>Profile Settings</h2>
     <br/>
+    <a class="btn btn-primary" href="{% url 'profile_password' %}">Change Password</a>
+    <br/><br/>
     <h3>Google</h3>
     {% if google_login %}
       <p>Connected as {{ google_login.uid }}</p>
@@ -25,7 +27,7 @@
         <p style="color: red">You must <a href="{% url 'profile_password' %}">define a password</a> for your account before disconnecting from Google.</p>
       {% endif %}
     {% else %}
-      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google" width="100%">
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social btn-google" width="20%">
         <span class="fa fa-google"></span>Sign in with Google</a><br><br>
     {% endif %}
 
@@ -44,7 +46,7 @@
         <p style="color: red">You must <a href="{% url 'profile_password' %}">define a password</a> for your account before disconnecting from Facebook.</p>
       {% endif %}
     {% else %}
-      <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook" width="100%">
+      <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-social btn-facebook" width="20%">
         <span class="fa fa-facebook"></span>Login with Facebook</a><br><br>
     {% endif %}
 
@@ -63,7 +65,7 @@
         <p style="color: red">You must <a href="{% url 'profile_password' %}">define a password</a> for your account before disconnecting from Twitter.</p>
       {% endif %}
     {% else %}
-      <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter" width="100%">
+      <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-social btn-twitter" width="20%">
         <span class="fa fa-twitter"></span>Login with Twitter</a><br><br>
     {% endif %}
 
@@ -82,7 +84,7 @@
         <p style="color: red">You must <a href="{% url 'profile_password' %}">define a password</a> for your account before disconnecting from Github.</p>
       {% endif %}
     {% else %}
-      <a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github" width="100%">
+      <a href="{% url 'social:begin' 'github' %}" class="btn btn-social btn-github" width="20%">
         <span class="fa fa-github"></span>Login with GitHub</a><br><br>
     {% endif %}
   </div>

@@ -1,0 +1,43 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - Add Policy
+{% endblock %}
+
+{% load bootstrap_toolkit %}
+{% block body_block %}
+<div class="container">
+  <div class="row">
+    <br/><br/>
+    {% if country %}
+      <h1>Add Policy</h1><br/>
+      <div class="offset-md-1 col-md-10 login-box">
+        <br/>
+        <h5>Please complete the following fields.</h5><br/>
+        <div class="col-md-10 offset-md-1">
+          <form id="policy_form" method="post" action="/countries/{{ country.slug }}/add_policy/" enctype="multipart/form-data">
+            <label>Country</label><br/>
+            <input class="controls" value="{{ country.name }}" disabled></input>
+
+            {% csrf_token %}
+
+            <!-- Display each form -->
+            {{ policy_form|as_bootstrap }}
+
+            <br/><br/>
+
+            <!-- Provide a button to click to submit the form. -->
+            <button class="btn btn-success" type="submit" name="submit">Add Policy</button>
+
+          </form>
+        </div>
+        <br/>
+      </div>
+    {% else %}
+      <strong>Can't add a Policy to a Country that doesn't exist.</strong>
+    {% endif %}
+    <br/><br/>
+  </div>
+</div>
+{% endblock %}

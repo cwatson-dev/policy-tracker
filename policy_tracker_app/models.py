@@ -149,6 +149,7 @@ class Policy(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     subject = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
+    reference_url = models.URLField(blank=True)
     country = models.ForeignKey(Country)
     status = models.ForeignKey(Status)
     category = models.ForeignKey(Category)

@@ -7,8 +7,11 @@
 
 {% block body_block %}
   {% if country %}
-    <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}
-                                                                         {{ image|slice:"-38:" }}{% endwith %});">
+    {% if country.background_image %}
+      <div class="col country-header text-center" style="background-image:url({% with country.background_image.url as image %}{{ image|slice:"-38:" }}{% endwith %});">
+    {% else %}
+      <div class="col country-header no-country-header text-center" style="background-image:url({{MEDIA_URL}}country_images/6a4e38f6bde7.png);">
+    {% endif %}
       <div class="transparent">
         <h1 class="align-self-center">{{ country.name }}</h1>
       </div>
@@ -18,7 +21,7 @@
         <div class="row policy-boxes align-self-center">
           <div class="col-md-6 align-self-center">
             <div class="col-md-11 policy-box box-spacer">
-              <h2>Policy Overview:</h2>
+              <h2>Policy Overview</h2>
               {% for status in status_fillers %}
                 <div class="row align-self-center policy-status" style="font-size: 1.7rem;">
                   <i class="fa fa-{% cycle 'clock-o' 'wrench' 'thumbs-up' 'thumbs-down' %} status-icon"
@@ -56,18 +59,33 @@
         <div class="row">
           <div class="col-md-11 policy-box box-spacer box-bottom">
             <br/>
-            <h5>
+            <h4>Description</h4>
+            <p>
+              {{ country.headOfState }} has been in office for {{ country.startDate|timesince }}.
+            </p>
+            <p>
               {{ country.description }}
-            </h5>
+            </p>
             <br/>
           </div>
         </div>
-        <br/><br/>
-        <div class="row">
-          <div class="col-md-11 policy-box box-spacer box-bottom">
-            {% include 'policy_tracker/policy-table.html' %}
+      </div>
+    </div>
+    <br/><br/>
+    {% if request.user.is_authenticated %}
+      <div class="policy-button add-policy-box">
+        <a href="add_policy" class="btn btn-primary btn-lg" role="button">Add Policy</a>
+      </div>
+    {% endif %}
+    <div class="container">
+      <div class="col-md-12">
+        {% if policies %}
+          <div class="row">
+            <div class="col-md-11 policy-box box-spacer box-bottom">
+              {% include 'policy_tracker/policy-table.html' %}
+            </div>
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   {% else %}

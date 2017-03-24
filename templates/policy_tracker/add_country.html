@@ -1,0 +1,34 @@
+{% extends 'policy_tracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    - Add Country
+{% endblock %}
+
+{% load bootstrap_toolkit %}
+{% block body_block %}
+  <div class="container">
+    <br/>
+    <h1>Add Country</h1><br/>
+    <div class="offset-md-1 col-md-10 login-box">
+      <br/>
+      <h5>Please complete the following fields.</h5><br/>
+      <div class="col-md-10 offset-md-1">
+        <form id="country_form" method="post" action="{% url 'add_country' %}" enctype="multipart/form-data">
+
+          {% csrf_token %}
+
+          <!-- Display each form -->
+          {{ country_form|as_bootstrap }}
+
+          <br/><br/>
+
+          <!-- Provide a button to click to submit the form. -->
+          <button class="btn btn-success" type="submit" name="submit">Add Country</button>
+
+        </form>
+      </div>
+      <br/>
+    </div>
+  </div>
+{% endblock %}
