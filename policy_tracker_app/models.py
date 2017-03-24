@@ -86,6 +86,7 @@ class UploadToPathAndRename(object):
         return os.path.join(self.sub_path, filename)
 
 class Country(models.Model):
+    # set country model fields
     name = models.CharField(max_length=128, unique=True)
     demonym = models.CharField(max_length=128, unique=True)
     capital = models.CharField(max_length=128, unique=True)
@@ -119,6 +120,7 @@ class Country(models.Model):
 
 
 class Category(models.Model):
+    # Category model fields
     name = models.CharField(max_length=64)
     fa_icon = models.CharField(max_length=64)
     fa_colour = models.CharField(max_length=6)
@@ -134,6 +136,7 @@ class Category(models.Model):
 
 
 class Status(models.Model):
+    # Status model fields
     name = models.CharField(max_length=64)
     fa_icon = models.CharField(max_length=64)
     fa_colour = models.CharField(max_length=6)
@@ -146,6 +149,7 @@ class Status(models.Model):
 
 
 class Policy(models.Model):
+    # Policy model fields
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     subject = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
@@ -165,6 +169,7 @@ class Policy(models.Model):
 
 
 class UserProfile(models.Model):
+    # User model fields
     user = models.OneToOneField(User)
 
     website = models.URLField(blank=True)
