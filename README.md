@@ -8,10 +8,6 @@ Clone this git repository down to your system.
 
 then
 
-`git checkout development`
-
-then
-
 `git pull`
 
 Navigate to `policy-tracker` folder; which contains the `manage.py` file.
@@ -22,13 +18,12 @@ Run the following command to install the correct dependencies:
 pip install -r requirements.txt
 ```
 
-### After the module has been installed you need to download the config.pyc file provided via Slack (or other means) and place it in the policy_tracker_project directory next to the settings.pyc file. This config file is vital in providing the correct credentials for OAuth2 configuration as it provides the application keys and secrets from Google, Facebook, Twitter and GitHub.
-
-With the `config.pyc` file in the correct location, you can safely run the application with:
+Next, you can safely run the application with:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+python populate_policy_tracker.py
 python manage.py runserver
 ```
 
@@ -47,8 +42,6 @@ You will then be redirected to the Home page with a logged in status.
 Once logged in with one of the services, the user can then access the below link to view their current connected services, and choose to disconnect any that they may wish to:
 
 <http://localhost:8000/profile/settings/>
-
-If the user is not logged in and they attempt to access the above page, the app is unable to catch this because there is no login page yet. Thus, an error should and will occur.
 
 ### When developing the application, always commit to a new branch that is based off of the 'Development' branch. That way any commits can be reviewed for errors/clashes before being pulled into the main 'Development' branch. Periodically, we will update the 'Master' branch to reflect the changes of the 'Development' branch.
 
